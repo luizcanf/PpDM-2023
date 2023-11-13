@@ -1,16 +1,26 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function TelaInicial() {
   const navigation = useNavigation();
+  const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
       <Text>Página inicial</Text>
-      <Button title="Tela DOIS" onPress={() => navigation.navigate('Tela2')} />
-      <Text>Open up App.js to start working on your app!</Text>
+      <TextInput
+        placeholder="E-mail"
+        keyboardType="email-address"
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+      <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
+      <Button title="Login" onPress={() => navigation.navigate('Tela2')} />
       <StatusBar style="auto" />
+      <Text>{text}</Text>
     </View>
   );
 }
@@ -45,5 +55,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
