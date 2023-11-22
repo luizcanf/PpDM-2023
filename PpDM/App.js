@@ -2,10 +2,12 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function TelaInicial() {
   const navigation = useNavigation();
-  const [text, onChangeText] = React.useState('');
+  const [email, onChangeText] = React.useState('');
+  const [senha, mudouASenha] = React.useState('');
   return (
     <View style={styles.container}>
       <Text>Página inicial</Text>
@@ -14,12 +16,18 @@ function TelaInicial() {
         keyboardType="email-address"
         style={styles.input}
         onChangeText={onChangeText}
-        value={text}
+        value={email}
       />
-      <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
+      <TextInput
+       placeholder="Senha"
+       secureTextEntry={true}
+       style={styles.input}
+       onChangeText={mudouASenha}
+       value={senha}
+       />
       <Button title="Login" onPress={() => navigation.navigate('Cadastro')} />
       <StatusBar style="auto" />
-      <Text>{text}</Text>
+      <Text>{email}</Text>
     </View>
   );
 }
